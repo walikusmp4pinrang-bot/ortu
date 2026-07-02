@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>SMPN 4 Suppa — Portal Akademik Siswa</title>
+<title>SMAN 5 Pinrang — Portal Akademik Siswa</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -1368,7 +1368,7 @@ window._sp5pReady = Promise.all([_sp5p_loadData(), _sp5p_loadConfig()]);
           </div>
         </div>
         <div class="school-name-block">
-          <h1>SMPN 4 Suppa</h1>
+          <h1>SMAN 5 Pinrang</h1>
           <p>Kabupaten Pinrang · Sul-Sel</p>
         </div>
       </div>
@@ -1407,7 +1407,7 @@ window._sp5pReady = Promise.all([_sp5p_loadData(), _sp5p_loadConfig()]);
             <img :src="logoSrc" style="width:100%;height:100%;object-fit:contain;border-radius:inherit">
           </div>
           <div class="card-logo-text">
-            <h2>SMPN 4 Suppa</h2>
+            <h2>SMAN 5 Pinrang</h2>
             <p>Portal Akademik</p>
           </div>
         </div>
@@ -1500,7 +1500,7 @@ window._sp5pReady = Promise.all([_sp5p_loadData(), _sp5p_loadConfig()]);
           <img :src="logoSrc" style="width:100%;height:100%;object-fit:contain;border-radius:inherit">
         </div>
         <div class="topbar-school">
-          <span>SMPN 4 Suppa</span>
+          <span>SMAN 5 Pinrang</span>
           <span>Portal Akademik</span>
         </div>
       </div>
@@ -2014,7 +2014,7 @@ window._sp5pReady = Promise.all([_sp5p_loadData(), _sp5p_loadConfig()]);
               <div class="server-menu-icon" style="background:#f0fdf4;color:#16a34a"><i class="fas fa-bullseye"></i></div>
               <div class="server-menu-text">
                 <div class="server-menu-label">Visi &amp; Misi</div>
-                <div class="server-menu-desc">Visi dan misi SMPN 4 Suppa</div>
+                <div class="server-menu-desc">Visi dan misi SMAN 5 Pinrang</div>
               </div>
               <i class="fas fa-chevron-right server-menu-arrow"></i>
             </button>
@@ -2150,12 +2150,12 @@ window._sp5pReady = Promise.all([_sp5p_loadData(), _sp5p_loadConfig()]);
             </a>
             <a href="https://www.facebook.com/sman5pinrang" target="_blank" class="medsos-item">
               <div class="medsos-icon" style="background:#1877f2;color:white"><i class="fab fa-facebook"></i></div>
-              <div><div class="medsos-label">Facebook</div><div class="medsos-handle">SMPN 4 Suppa</div></div>
+              <div><div class="medsos-label">Facebook</div><div class="medsos-handle">SMAN 5 Pinrang</div></div>
               <i class="fas fa-external-link-alt" style="color:#d1d5db;margin-left:auto;font-size:13px"></i>
             </a>
             <a href="https://www.youtube.com/@sman5pinrang" target="_blank" class="medsos-item">
               <div class="medsos-icon" style="background:#ff0000;color:white"><i class="fab fa-youtube"></i></div>
-              <div><div class="medsos-label">YouTube</div><div class="medsos-handle">SMPN 4 Suppa</div></div>
+              <div><div class="medsos-label">YouTube</div><div class="medsos-handle">SMAN 5 Pinrang</div></div>
               <i class="fas fa-external-link-alt" style="color:#d1d5db;margin-left:auto;font-size:13px"></i>
             </a>
             <a href="https://www.sman5pinrang.web.id" target="_blank" class="medsos-item">
@@ -2306,27 +2306,35 @@ window._sp5pReady = Promise.all([_sp5p_loadData(), _sp5p_loadConfig()]);
 const { createApp, ref, computed, watch } = Vue;
 
 const LOGO_URL     = 'https://www.smpn3batang.sch.id/wp-content/uploads/2019/09/TutwuriPNG.png';//foto logo
-const LOGO_CACHE_KEY = 'sp5p_logo_b64';
+const LOGO_CACHE_KEY  = 'sp5p_logo_b64';
+const LOGO_URL_KEY    = 'sp5p_logo_url';
 
 async function loadLogo() {
-  const cached = localStorage.getItem(LOGO_CACHE_KEY);
-  if (cached) return cached;
+  const cachedUrl  = localStorage.getItem(LOGO_URL_KEY);
+  const cachedData = localStorage.getItem(LOGO_CACHE_KEY);
+
+  // Pakai cache HANYA jika url sumber sama dengan yang tersimpan
+  if (cachedData && cachedUrl === LOGO_URL) return cachedData;
+
   try {
     const resp = await fetch(LOGO_URL);
-    if (!resp.ok) return LOGO_URL;
+    if (!resp.ok) return cachedData || LOGO_URL;
     const blob = await resp.blob();
     return new Promise((resolve) => {
       const reader = new FileReader();
       reader.onloadend = () => {
         const b64 = reader.result;
-        try { localStorage.setItem(LOGO_CACHE_KEY, b64); } catch {}
+        try {
+          localStorage.setItem(LOGO_CACHE_KEY, b64);
+          localStorage.setItem(LOGO_URL_KEY, LOGO_URL);
+        } catch {}
         resolve(b64);
       };
-      reader.onerror = () => resolve(LOGO_URL);
+      reader.onerror = () => resolve(cachedData || LOGO_URL);
       reader.readAsDataURL(blob);
     });
   } catch {
-    return cached || LOGO_URL;
+    return cachedData || LOGO_URL;
   }
 }
 
@@ -2372,20 +2380,23 @@ function _idbSet(key, value) {
 }
 
 async function loadBgImage() {
-  const cached = await _idbGet(BG_IDB_KEY);
-  if (cached) return cached;
+  const cached = await _idbGet(BG_IDB_KEY); // { url, data } atau null
+
+  // Pakai cache HANYA jika url sumber sama dengan yang tersimpan
+  if (cached && cached.url === BG_IMAGE_URL && cached.data) return cached.data;
+
   try {
     const resp = await fetch(BG_IMAGE_URL);
-    if (!resp.ok) return BG_IMAGE_URL;
+    if (!resp.ok) return (cached && cached.data) || BG_IMAGE_URL;
     const blob = await resp.blob();
     return new Promise((resolve) => {
       const reader = new FileReader();
       reader.onloadend = async () => {
         const b64 = reader.result;
-        await _idbSet(BG_IDB_KEY, b64);
+        await _idbSet(BG_IDB_KEY, { url: BG_IMAGE_URL, data: b64 });
         resolve(b64);
       };
-      reader.onerror = () => resolve(BG_IMAGE_URL);
+      reader.onerror = () => resolve((cached && cached.data) || BG_IMAGE_URL);
       reader.readAsDataURL(blob);
     });
   } catch {
@@ -2395,14 +2406,20 @@ async function loadBgImage() {
 
 createApp({
   setup() {
-    const logoSrc = ref(localStorage.getItem(LOGO_CACHE_KEY) || LOGO_URL);
-    loadLogo().then(src => { logoSrc.value = src; });
+    const logoSrc = ref(
+  (localStorage.getItem(LOGO_URL_KEY) === LOGO_URL && localStorage.getItem(LOGO_CACHE_KEY))
+    || LOGO_URL
+);
+loadLogo().then(src => { logoSrc.value = src; });
 
     const bgImageSrc = ref('');
-    _idbGet(BG_IDB_KEY).then(cached => {
-      if (cached) { bgImageSrc.value = cached; }
-      else { loadBgImage().then(src => { bgImageSrc.value = src; }); }
-    });
+_idbGet(BG_IDB_KEY).then(cached => {
+  if (cached && cached.url === BG_IMAGE_URL && cached.data) {
+    bgImageSrc.value = cached.data;
+  } else {
+    loadBgImage().then(src => { bgImageSrc.value = src; });
+  }
+});
 
     const loggedIn      = ref(false);
     const loading       = ref(false);
@@ -2737,7 +2754,7 @@ createApp({
 </head>
 <body>
   <h1>📊 Rekap Akademik Siswa</h1>
-  <p class="subtitle">SMPN 4 Suppa — ${d.nama} / ${d.nisn} / ${d.kelas}</p>
+  <p class="subtitle">SMAN 5 Pinrang — ${d.nama} / ${d.nisn} / ${d.kelas}</p>
 `;
 
       mapelList.forEach(mapel => {
