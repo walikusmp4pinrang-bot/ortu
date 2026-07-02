@@ -1952,13 +1952,13 @@ window._sp5pReady = Promise.all([_sp5p_loadData(), _sp5p_loadConfig()]);
             </div>
           </div>
 
-          <div v-if="parsedNotes.length === 0" class="empty-state">
-            <i class="fas fa-sticky-note"></i>
-            <p>Belum ada catatan dari guru</p>
-          </div>
+          <div v-if="visibleNotes.length === 0" class="empty-state">
+  <i class="fas fa-sticky-note"></i>
+  <p>Belum ada catatan dari guru</p>
+</div>
 
-          <div class="notes-grid" v-else>
-            <div v-for="(note, idx) in parsedNotes" :key="idx"
+<div class="notes-grid" v-else>
+  <div v-for="(note, idx) in visibleNotes" :key="idx"
               class="note-card"
               :class="'animate-delay-' + Math.min(idx+1,5)"
               :style="{ borderTopColor: note.border, boxShadow: '0 4px 18px ' + note.shadow }">
@@ -2676,6 +2676,11 @@ createApp({
         }
       }
     };
+
+
+const visibleNotes = computed(() => {
+  return parsedNotes.value.filter(n => n.content && n.content.trim() !== '-');
+});
 
     const downloadPdf = () => {
       const d = studentData.value;
