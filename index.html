@@ -2313,11 +2313,13 @@ async function loadLogo() {
   const cachedUrl  = localStorage.getItem(LOGO_URL_KEY);
   const cachedData = localStorage.getItem(LOGO_CACHE_KEY);
 
-  // Pakai cache HANYA jika url sumber sama dengan yang tersimpan
   if (cachedData && cachedUrl === LOGO_URL) return cachedData;
 
   try {
-    const resp = await fetch(LOGO_URL);
+    const resp = await fetch(LOGO_URL + (LOGO_URL.includes('?') ? '&' : '?') + 'v=' + Date.now(), {
+      cache: 'no-store',
+      headers: { 'Cache-Control': 'no-cache, no-store, must-revalidate', 'Pragma': 'no-cache' }
+    });
     if (!resp.ok) return cachedData || LOGO_URL;
     const blob = await resp.blob();
     return new Promise((resolve) => {
