@@ -3,21 +3,13 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>SMPN 4 Suppa — Portal Akademik Siswa</title>
+<title>SMAN 5 Pinrang — Portal Akademik Siswa</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.4.21/vue.global.prod.min.js"></script>
 <script>
-// ══════════════════════════════════════════════════════════════════
-//  SISTEM KEAMANAN DATA SISWA
-//  ► datasiswa.js di-fetch setiap buka/refresh (no-cache)
-//  ► Data didekripsi di memori → window.SISWA_DATA
-//  ► window.__SP5P dihapus segera setelah decrypt
-//  ► window.SISWA_DATA dihapus setelah login berhasil
-//  ► Anti-DevTools: detect F12 → hapus data dari memori
-// ══════════════════════════════════════════════════════════════════
 
 const _SP5P_KEY = "sp5p_enc_2025_sman5pinrang_secure!";
 
@@ -1376,7 +1368,7 @@ window._sp5pReady = Promise.all([_sp5p_loadData(), _sp5p_loadConfig()]);
           </div>
         </div>
         <div class="school-name-block">
-          <h1>SMPN 4 Suppa</h1>
+          <h1>SMAN 5 Pinrang</h1>
           <p>Kabupaten Pinrang · Sul-Sel</p>
         </div>
       </div>
@@ -1415,7 +1407,7 @@ window._sp5pReady = Promise.all([_sp5p_loadData(), _sp5p_loadConfig()]);
             <img :src="logoSrc" style="width:100%;height:100%;object-fit:contain;border-radius:inherit">
           </div>
           <div class="card-logo-text">
-            <h2>SMPN 4 Suppa</h2>
+            <h2>SMAN 5 Pinrang</h2>
             <p>Portal Akademik</p>
           </div>
         </div>
@@ -1508,7 +1500,7 @@ window._sp5pReady = Promise.all([_sp5p_loadData(), _sp5p_loadConfig()]);
           <img :src="logoSrc" style="width:100%;height:100%;object-fit:contain;border-radius:inherit">
         </div>
         <div class="topbar-school">
-          <span>SMPN 4 Suppa</span>
+          <span>SMAN 5 Pinrang</span>
           <span>Portal Akademik</span>
         </div>
       </div>
@@ -2011,13 +2003,13 @@ window._sp5pReady = Promise.all([_sp5p_loadData(), _sp5p_loadConfig()]);
             </button>
           </div>
 
-          <div class="server-section-title" style="display:none">Sekolah</div>
-<div class="server-menu-card" style="display:none">
+          <div class="server-section-title">Sekolah</div>
+          <div class="server-menu-card">
             <button class="server-menu-item" @click="openSub('visimisi')">
               <div class="server-menu-icon" style="background:#f0fdf4;color:#16a34a"><i class="fas fa-bullseye"></i></div>
               <div class="server-menu-text">
                 <div class="server-menu-label">Visi &amp; Misi</div>
-                <div class="server-menu-desc">Visi dan misi SMPN 4 Suppa</div>
+                <div class="server-menu-desc">Visi dan misi SMAN 5 Pinrang</div>
               </div>
               <i class="fas fa-chevron-right server-menu-arrow"></i>
             </button>
@@ -2153,12 +2145,12 @@ window._sp5pReady = Promise.all([_sp5p_loadData(), _sp5p_loadConfig()]);
             </a>
             <a href="https://www.facebook.com/sman5pinrang" target="_blank" class="medsos-item">
               <div class="medsos-icon" style="background:#1877f2;color:white"><i class="fab fa-facebook"></i></div>
-              <div><div class="medsos-label">Facebook</div><div class="medsos-handle">SMPN 4 Suppa</div></div>
+              <div><div class="medsos-label">Facebook</div><div class="medsos-handle">SMAN 5 Pinrang</div></div>
               <i class="fas fa-external-link-alt" style="color:#d1d5db;margin-left:auto;font-size:13px"></i>
             </a>
             <a href="https://www.youtube.com/@sman5pinrang" target="_blank" class="medsos-item">
               <div class="medsos-icon" style="background:#ff0000;color:white"><i class="fab fa-youtube"></i></div>
-              <div><div class="medsos-label">YouTube</div><div class="medsos-handle">SMPN 4 Suppa</div></div>
+              <div><div class="medsos-label">YouTube</div><div class="medsos-handle">SMAN 5 Pinrang</div></div>
               <i class="fas fa-external-link-alt" style="color:#d1d5db;margin-left:auto;font-size:13px"></i>
             </a>
             <a href="https://www.sman5pinrang.web.id" target="_blank" class="medsos-item">
@@ -2256,15 +2248,28 @@ window._sp5pReady = Promise.all([_sp5p_loadData(), _sp5p_loadConfig()]);
             </div>
             <button class="modal-close" @click="closeModal"><i class="fas fa-times"></i></button>
           </div>
-          <div style="background:linear-gradient(135deg,#faf5ff,#ede9fe);border-radius:14px;padding:16px;margin-bottom:16px;display:flex;align-items:center;gap:12px">
-            <div style="width:48px;height:48px;border-radius:14px;background:#7c3aed;color:white;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:20px;font-weight:700">
-              {{ selectedAssessment.remaining }}
-            </div>
-            <div>
-              <div style="font-weight:700;color:#4c1d95">{{ selectedAssessment.remaining === 0 ? 'Semua tugas selesai!' : 'Tugas tersisa' }}</div>
-              <div style="font-size:12px;color:#7c3aed">Nilai ambang: {{ studentData.nilaiAmbang }}</div>
-            </div>
-          </div>
+          <div :style="{
+  background: selectedAssessment.remaining > 0 ? 'linear-gradient(135deg,#fef2f2,#fee2e2)' : 'linear-gradient(135deg,#faf5ff,#ede9fe)',
+  borderRadius: '14px', padding: '16px', marginBottom: '16px',
+  display: 'flex', alignItems: 'center', gap: '12px'
+}">
+  <div :style="{
+    width: '48px', height: '48px', borderRadius: '14px',
+    background: selectedAssessment.remaining > 0 ? '#dc2626' : '#7c3aed',
+    color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center',
+    fontFamily: 'Playfair Display, serif', fontSize: '20px', fontWeight: '700'
+  }">
+    {{ selectedAssessment.remaining }}
+  </div>
+  <div>
+    <div :style="{ fontWeight: '700', color: selectedAssessment.remaining > 0 ? '#991b1b' : '#4c1d95' }">
+      {{ selectedAssessment.remaining === 0 ? 'Semua tugas selesai!' : 'Tugas tersisa' }}
+    </div>
+    <div :style="{ fontSize: '12px', color: selectedAssessment.remaining > 0 ? '#dc2626' : '#7c3aed' }">
+      Nilai ambang: {{ studentData.nilaiAmbang }}
+    </div>
+  </div>
+</div>
           <div style="border-top:2px solid #f3f4f6;margin-bottom:0"></div>
         </div>
         <div class="modal-scroll">
@@ -2295,7 +2300,7 @@ window._sp5pReady = Promise.all([_sp5p_loadData(), _sp5p_loadConfig()]);
 <script>
 const { createApp, ref, computed, watch } = Vue;
 
-const LOGO_URL     = 'https://www.smpn3batang.sch.id/wp-content/uploads/2019/09/TutwuriPNG.png';    //foto logo
+const LOGO_URL     = 'https://www.sman5pinrang.web.id/logo.png';
 const LOGO_CACHE_KEY = 'sp5p_logo_b64';
 
 async function loadLogo() {
@@ -2320,7 +2325,7 @@ async function loadLogo() {
   }
 }
 
-const BG_IMAGE_URL = 'https://cdn-sekolah.annibuku.com/40314194/5.jpg'; // foto background
+const BG_IMAGE_URL = 'https://www.sman5pinrang.web.id/image1.jpg';
 const BG_IDB_DB    = 'sp5p_cache';
 const BG_IDB_STORE = 'images';
 const BG_IDB_KEY   = 'bg_image1';
@@ -2726,7 +2731,7 @@ createApp({
 </head>
 <body>
   <h1>📊 Rekap Akademik Siswa</h1>
-  <p class="subtitle">SMPN 4 Suppa — ${d.nama} / ${d.nisn} / ${d.kelas}</p>
+  <p class="subtitle">SMAN 5 Pinrang — ${d.nama} / ${d.nisn} / ${d.kelas}</p>
 `;
 
       mapelList.forEach(mapel => {
