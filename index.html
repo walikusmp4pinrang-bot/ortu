@@ -1597,10 +1597,9 @@ window._sp5pReady = Promise.all([_sp5p_loadData(), _sp5p_loadConfig()]);
           </div>
 
           <div class="section-title">
-  <i class="fas fa-calendar-day"></i> Jadwal Pelajaran Hari Ini
-</div>
-<div style="font-size:13px;color:#6b7280;margin-top:-8px;margin-bottom:14px;font-weight:600">
-  {{ todayLabel }}
+  <i class="fas fa-calendar-day"></i>
+  Jadwal Pelajaran Hari Ini :
+  <span style="color:#2563eb;font-weight:800">{{ todayLabel }}</span>
 </div>
 
           <div v-if="parsedSchedule.length === 0" class="empty-state">
