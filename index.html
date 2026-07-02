@@ -2678,10 +2678,6 @@ createApp({
     };
 
 
-const visibleNotes = computed(() => {
-  return parsedNotes.value.filter(n => n.content && n.content.trim() !== '-');
-});
-
     const downloadPdf = () => {
       const d = studentData.value;
 
@@ -2984,6 +2980,11 @@ const todayLabel = computed(() => {
       });
     });
 
+const visibleNotes = computed(() => {
+  return parsedNotes.value.filter(n => n.content && n.content.trim() !== '-');
+});
+
+
     const ALL_MONTHS = [
       { num:'01', label:'Januari' },  { num:'02', label:'Februari' },
       { num:'03', label:'Maret' },    { num:'04', label:'April' },
@@ -3204,7 +3205,7 @@ const todayLabel = computed(() => {
       loggedIn, loading, nisnInput, passwordInput, errorMessage, studentData,
       logoSrc, bgImageSrc, showDownloadConfirm, showResetConfirm, resetAllData,
       currentTab, tabs, login, switchTab,
-      parsedSchedule, parsedAttendance, parsedAssessment, parsedNotes, todayLabel,
+      parsedSchedule, parsedAttendance, parsedAssessment, parsedNotes, todayLabel, visibleNotes,
       getStatusBadgeClass, attendanceTotal, attendancePercentage,
       showAttendanceModal, showAssessmentModal,
       openAttendanceDetail, openAssessmentDetail, closeModal,
